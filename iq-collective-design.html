@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The IQ Collective — Preconstruction &amp; Pipeline Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15181A;
+    --ink-2:#1B1F22;
+    --paper:#EEE9E0;
+    --paper-dim:#B9B4A9;
+    --bronze:#A9814C;
+    --bronze-dim:#8A6B3F;
+    --slate:#3B5166;
+    --redline:#C1502E;
+    --hair:rgba(238,233,224,0.10);
+    --hair-strong:rgba(238,233,224,0.18);
+
+    --f-display:'Space Grotesk', sans-serif;
+    --f-body:'Inter', sans-serif;
+    --f-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--f-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img,svg{display:block;max-width:100%;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  @media (max-width:720px){
+    .wrap{padding:0 22px;}
+  }
+
+  /* ---------- utility text styles ---------- */
+  .eyebrow{
+    font-family:var(--f-mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--bronze);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 0 18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;
+    height:1px;
+    background:var(--bronze);
+    display:inline-block;
+  }
+  h1,h2,h3{
+    font-family:var(--f-display);
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:var(--paper);
+  }
+  .lede{
+    font-size:19px;
+    line-height:1.65;
+    color:var(--paper-dim);
+    max-width:640px;
+  }
+  .btn{
+    font-family:var(--f-mono);
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 26px;
+    border-radius:2px;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn-primary{
+    background:var(--bronze);
+    color:var(--ink);
+    border:1px solid var(--bronze);
+  }
+  .btn-primary:hover{background:#BE9459; transform:translateY(-1px);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--paper);
+    border:1px solid var(--hair-strong);
+  }
+  .btn-ghost:hover{border-color:var(--bronze); color:var(--bronze);}
+  .btn-arrow{transition:transform .15s ease;}
+  .btn:hover .btn-arrow{transform:translateX(3px);}
+
+  section{
+    padding:110px 0;
+    border-bottom:1px solid var(--hair);
+    position:relative;
+  }
+  @media (max-width:720px){
+    section{padding:70px 0;}
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(21,24,26,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--hair);
+  }
+  .nav-inner{
+    max-width:1180px;margin:0 auto;padding:20px 40px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  @media (max-width:720px){ .nav-inner{padding:16px 22px;} }
+  .logo{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:17px;
+    letter-spacing:.02em;
+    color:var(--paper);
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .logo .mark{
+    width:9px;height:9px;background:var(--bronze);
+    display:inline-block;border-radius:1px;
+  }
+  .nav-cta{
+    font-family:var(--f-mono);
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--paper);
+    border:1px solid var(--hair-strong);
+    padding:10px 16px;
+    text-decoration:none;
+    border-radius:2px;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{border-color:var(--bronze);color:var(--bronze);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding-top:100px;
+    padding-bottom:0;
+    overflow:hidden;
+  }
+  .hero-grid{
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(var(--hair) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hair) 1px, transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:linear-gradient(to bottom, black, transparent 78%);
+    mask-image:linear-gradient(to bottom, black, transparent 78%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative; padding-bottom:70px;}
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 68px);
+    line-height:1.06;
+    max-width:920px;
+    margin-bottom:26px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--bronze);
+  }
+  .hero-cta-row{
+    display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+    margin-top:38px;
+  }
+  .trust-line{
+    font-family:var(--f-mono);
+    font-size:12.5px;
+    color:var(--paper-dim);
+    margin-top:20px;
+    letter-spacing:.02em;
+  }
+  .trust-line .dot{color:var(--redline);}
+
+  /* programme bar teaser under hero */
+  .prog-teaser{
+    margin-top:80px;
+    border-top:1px solid var(--hair);
+    padding-top:26px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+  }
+  .prog-teaser .seg{
+    padding:0 18px 0 0;
+    border-right:1px solid var(--hair);
+  }
+  .prog-teaser .seg:last-child{border-right:none;}
+  .prog-teaser .bar{
+    height:5px; background:var(--hair-strong); border-radius:2px; margin-bottom:14px;
+    position:relative; overflow:hidden;
+  }
+  .prog-teaser .seg.active .bar{background:var(--bronze);}
+  .prog-teaser .num{
+    font-family:var(--f-mono); font-size:11px; color:var(--paper-dim); letter-spacing:.08em;
+  }
+  .prog-teaser .lbl{
+    font-family:var(--f-body); font-size:13.5px; color:var(--paper); margin-top:4px; font-weight:500;
+  }
+  @media (max-width:820px){
+    .prog-teaser{grid-template-columns:repeat(2,1fr); row-gap:22px;}
+    .prog-teaser .seg:nth-child(2){border-right:none;}
+  }
+
+  /* ---------- PROBLEM ---------- */
+  .split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:start;
+  }
+  @media (max-width:860px){
+    .split{grid-template-columns:1fr; gap:40px;}
+  }
+  .problem h2{font-size:clamp(28px,3.4vw,38px); line-height:1.2; margin-bottom:20px;}
+  .diag-list{list-style:none; margin:0; padding:0; border-top:1px solid var(--hair);}
+  .diag-list li{
+    display:flex; justify-content:space-between; gap:20px;
+    padding:20px 0;
+    border-bottom:1px solid var(--hair);
+    font-family:var(--f-mono);
+    font-size:14px;
+  }
+  .diag-list li span:first-child{color:var(--paper-dim); text-transform:uppercase; letter-spacing:.05em; font-size:12px; padding-top:2px;}
+  .diag-list li span:last-child{color:var(--paper); text-align:right; max-width:60%;}
+
+  /* ---------- POSITIONING / CREDENTIAL CARD ---------- */
+  .credential{
+    background:var(--ink-2);
+    border:1px solid var(--hair-strong);
+    border-left:3px solid var(--bronze);
+    padding:44px 46px;
+    border-radius:2px;
+  }
+  @media (max-width:720px){ .credential{padding:30px 26px;} }
+  .credential .tag{
+    font-family:var(--f-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--bronze); margin-bottom:18px; display:block;
+  }
+  .credential p{color:var(--paper-dim); font-size:16.5px; margin:0 0 16px;}
+  .credential p:last-child{margin-bottom:0;}
+  .credential strong{color:var(--paper); font-weight:600;}
+  .credential-stat{
+    display:flex; gap:34px; margin-top:30px; padding-top:26px; border-top:1px solid var(--hair-strong);
+  }
+  .credential-stat div .n{font-family:var(--f-mono); font-size:26px; color:var(--paper); font-weight:500;}
+  .credential-stat div .l{font-size:12.5px; color:var(--paper-dim); margin-top:4px;}
+
+  /* ---------- SERVICES ---------- */
+  .cards3{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--hair); border:1px solid var(--hair); margin-top:56px;
+  }
+  @media (max-width:860px){ .cards3{grid-template-columns:1fr;} }
+  .card{
+    background:var(--ink);
+    padding:40px 34px;
+  }
+  .card .idx{font-family:var(--f-mono); color:var(--bronze); font-size:13px; margin-bottom:26px;}
+  .card h3{font-size:20px; margin-bottom:14px; line-height:1.25;}
+  .card p{color:var(--paper-dim); font-size:15px; margin:0;}
+
+  /* ---------- PROCESS / PROGRAMME BAR ---------- */
+  .programme{margin-top:60px;}
+  .prog-row{
+    display:grid; grid-template-columns:120px 1fr; gap:26px;
+    padding:26px 0;
+    border-top:1px solid var(--hair);
+    align-items:start;
+  }
+  .prog-row:last-child{border-bottom:1px solid var(--hair);}
+  .prog-row .code{font-family:var(--f-mono); color:var(--bronze); font-size:14px; letter-spacing:.05em;}
+  .prog-row .code .d{color:var(--paper-dim); display:block; font-size:11px; margin-top:4px;}
+  .prog-row h3{font-size:18.5px; margin-bottom:8px;}
+  .prog-row p{color:var(--paper-dim); font-size:15px; margin:0; max-width:620px;}
+  .prog-row .track{
+    height:3px; background:var(--hair-strong); margin-top:16px; border-radius:2px; overflow:hidden; max-width:620px;
+  }
+  .prog-row .track i{display:block; height:100%; background:var(--bronze);}
+  @media (max-width:640px){
+    .prog-row{grid-template-columns:1fr;}
+  }
+
+  /* ---------- PROOF ---------- */
+  .proof-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:1px;
+    background:var(--hair); border:1px solid var(--hair); margin:44px 0 30px;
+  }
+  @media (max-width:720px){ .proof-grid{grid-template-columns:1fr;} }
+  .proof-cell{background:var(--ink); padding:36px 34px;}
+  .proof-cell .n{font-family:var(--f-mono); font-size:34px; color:var(--paper); font-weight:500;}
+  .proof-cell .l{font-size:14.5px; color:var(--paper-dim); margin-top:10px; line-height:1.5;}
+  .proof-cell .cap{
+    font-family:var(--f-mono); font-size:11px; color:var(--redline); margin-top:14px;
+    text-transform:uppercase; letter-spacing:.06em;
+  }
+  .note{
+    font-size:14.5px; color:var(--paper-dim); border-left:2px solid var(--hair-strong); padding-left:18px; max-width:700px;
+  }
+
+  /* ---------- FIT ---------- */
+  .fit-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--hair); border:1px solid var(--hair); margin-top:50px;}
+  @media (max-width:800px){ .fit-grid{grid-template-columns:1fr;} }
+  .fit-col{background:var(--ink); padding:38px 36px;}
+  .fit-col h3{font-size:16px; font-family:var(--f-mono); text-transform:uppercase; letter-spacing:.06em; margin-bottom:24px;}
+  .fit-col.yes h3{color:var(--bronze);}
+  .fit-col.no h3{color:var(--paper-dim);}
+  .fit-col ul{list-style:none; margin:0; padding:0;}
+  .fit-col li{
+    display:flex; gap:14px; padding:14px 0; border-top:1px solid var(--hair); font-size:15px; color:var(--paper-dim);
+  }
+  .fit-col li:first-child{border-top:none;}
+  .fit-col.yes li::before{content:"+"; color:var(--bronze); font-family:var(--f-mono); flex-shrink:0;}
+  .fit-col.no li::before{content:"–"; color:var(--paper-dim); font-family:var(--f-mono); flex-shrink:0;}
+
+  /* ---------- FINAL CTA ---------- */
+  .final{
+    text-align:center;
+    background:
+      radial-gradient(60% 100% at 50% 0%, rgba(169,129,76,0.14), transparent 70%),
+      var(--ink);
+  }
+  .final h2{font-size:clamp(30px,4vw,46px); max-width:720px; margin:0 auto 22px; line-height:1.15;}
+  .final .lede{margin:0 auto 40px; text-align:center;}
+  .final .btn-primary{padding:19px 36px; font-size:14px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:56px 0; border-bottom:none;}
+  .foot-grid{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:30px; flex-wrap:wrap;
+  }
+  .foot-grid .left .logo{margin-bottom:14px;}
+  .foot-grid .left p{color:var(--paper-dim); font-size:14px; max-width:340px; margin:0;}
+  .foot-grid .right{text-align:right; font-family:var(--f-mono); font-size:12.5px; color:var(--paper-dim);}
+  .foot-grid .right a{color:var(--paper); text-decoration:none;}
+  @media (max-width:600px){ .foot-grid{flex-direction:column; align-items:flex-start;} .foot-grid .right{text-align:left;} }
+  .copyright{margin-top:40px; padding-top:24px; border-top:1px solid var(--hair); font-family:var(--f-mono); font-size:11.5px; color:var(--paper-dim);}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top"><span class="mark"></span>THE IQ COLLECTIVE</a>
+    <a class="nav-cta" href="#audit">Book a Pipeline Audit</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-grid"></div>
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Preconstruction &amp; Pipeline Systems · Design &amp; Build £1M–£5M+</p>
+      <h1>The gap between £1M and £10M isn't ability. <em>It's pipeline.</em></h1>
+      <p class="lede">We install the enquiry, qualification and preconstruction systems that turn a capable £1M–£5M design &amp; build firm into one with a predictable, margin-fit pipeline — built by someone who ran precon on the other side of the table, not sold ads from the outside.</p>
+
+      <div class="hero-cta-row">
+        <a href="#audit" class="btn btn-primary">Book a Pipeline Audit <span class="btn-arrow">→</span></a>
+        <a href="#process" class="btn btn-ghost">See how it works</a>
+      </div>
+      <p class="trust-line"><span class="dot">●</span> By invitation. A small number of D&amp;B and fit-out firms taken on per quarter.</p>
+
+      <div class="prog-teaser">
+        <div class="seg active">
+          <div class="bar"></div>
+          <div class="num">01</div>
+          <div class="lbl">Pipeline Audit</div>
+        </div>
+        <div class="seg">
+          <div class="bar"></div>
+          <div class="num">02</div>
+          <div class="lbl">System Build</div>
+        </div>
+        <div class="seg">
+          <div class="bar"></div>
+          <div class="num">03</div>
+          <div class="lbl">Install &amp; Launch</div>
+        </div>
+        <div class="seg">
+          <div class="bar"></div>
+          <div class="num">04</div>
+          <div class="lbl">Operate &amp; Scale</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="wrap">
+      <p class="eyebrow">Where most £1M–£5M firms get stuck</p>
+      <div class="split">
+        <div>
+          <h2>You're not short on ability. You're short on the systems that turn ability into revenue.</h2>
+          <p class="lede" style="font-size:16.5px;">Most design &amp; build and fit-out firms at this stage are good at the work and bad at the pipeline. Enquiries come from referrals, repeat clients, and whoever happens to call. Tender teams end up chasing volume instead of fit — and growth gets capped by the founder's network, not the firm's capability.</p>
+        </div>
+        <ul class="diag-list">
+          <li><span>Enquiry flow</span><span>Feast or famine</span></li>
+          <li><span>Lead qualification</span><span>None. Everything gets tendered.</span></li>
+          <li><span>Pipeline visibility</span><span>In someone's head, not a system</span></li>
+          <li><span>Growth ceiling</span><span>Set by your network, not your capacity</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSITIONING -->
+  <section class="positioning">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Why this isn't an ads agency</p>
+          <h2 style="font-size:clamp(28px,3.4vw,38px); line-height:1.2;">We've sat on the other side of the tender.</h2>
+        </div>
+        <div class="credential">
+          <span class="tag">Founder credential</span>
+          <p>Most agencies selling "lead generation" to construction firms have never opened a BOQ, never sat in a precon meeting, and can't tell a qualified enquiry from a time-waster with a Pinterest board.</p>
+          <p><strong>8 years as a preconstruction manager</strong> — running tenders, building cost plans, sitting across the table from firms exactly like yours. We know what a real enquiry looks like at £1M–£5M+ scale because we've been the one qualifying them from the inside.</p>
+          <p>We don't run ads and hand you a spreadsheet of names. We install the system — acquisition, qualification, and reporting — that a serious preconstruction function actually needs.</p>
+          <div class="credential-stat">
+            <div><div class="n">8</div><div class="l">Years in preconstruction</div></div>
+            <div><div class="n">2</div><div class="l">Directors — sales &amp; technical delivery</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="wrap">
+      <p class="eyebrow">The system</p>
+      <h2 style="font-size:clamp(28px,3.4vw,38px); max-width:640px; line-height:1.2;">Three systems. One pipeline.</h2>
+      <div class="cards3">
+        <div class="card">
+          <div class="idx">01</div>
+          <h3>Pipeline Acquisition</h3>
+          <p>Paid campaigns engineered around your actual capacity and margin targets — not volume for its own sake. Built for the buyers and project types that fit a £1M–£5M+ operation, across the channels that actually reach them.</p>
+        </div>
+        <div class="card">
+          <div class="idx">02</div>
+          <h3>Preconstruction Qualification</h3>
+          <p>Every enquiry is screened against your project criteria — budget, programme, procurement route, fit — before it reaches your estimating desk.</p>
+        </div>
+        <div class="card">
+          <div class="idx">03</div>
+          <h3>Growth Infrastructure</h3>
+          <p>A CRM and reporting system built around your pipeline. Full visibility on what's coming in, what's qualified, and what's actually converting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="wrap">
+      <p class="eyebrow">How we install it</p>
+      <h2 style="font-size:clamp(28px,3.4vw,38px); max-width:640px; line-height:1.2;">A phased build. Not a campaign switched on overnight.</h2>
+
+      <div class="programme">
+        <div class="prog-row">
+          <div class="code">01<span class="d">Weeks 1–2</span></div>
+          <div>
+            <h3>Pipeline Audit</h3>
+            <p>We map your current enquiry flow, tender hit rate and capacity — and identify exactly where the system is leaking pipeline.</p>
+            <div class="track"><i style="width:25%"></i></div>
+          </div>
+        </div>
+        <div class="prog-row">
+          <div class="code">02<span class="d">Weeks 2–5</span></div>
+          <div>
+            <h3>System Build</h3>
+            <p>We build the acquisition, qualification and CRM infrastructure around your specific capacity, margin targets and project criteria.</p>
+            <div class="track"><i style="width:50%"></i></div>
+          </div>
+        </div>
+        <div class="prog-row">
+          <div class="code">03<span class="d">Weeks 5–6</span></div>
+          <div>
+            <h3>Install &amp; Launch</h3>
+            <p>Systems go live. Qualification criteria are tested and tightened against real enquiries, not assumptions.</p>
+            <div class="track"><i style="width:75%"></i></div>
+          </div>
+        </div>
+        <div class="prog-row">
+          <div class="code">04<span class="d">Ongoing</span></div>
+          <div>
+            <h3>Operate &amp; Scale</h3>
+            <p>We run and report on the system weekly — scaling what's working, cutting what isn't — with full visibility, not a black box.</p>
+            <div class="track"><i style="width:100%"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="proof">
+    <div class="wrap">
+      <p class="eyebrow">Track record</p>
+      <h2 style="font-size:clamp(28px,3.4vw,38px); max-width:760px; line-height:1.2;">Built on results at the tier below. Now installing the same infrastructure at £1M–£5M+.</h2>
+      <p class="lede" style="font-size:16.5px; margin-top:20px;">This system isn't theoretical. It's the same pipeline, qualification and reporting infrastructure we've run for premium residential contractors.</p>
+
+      <div class="proof-grid">
+        <div class="proof-cell">
+          <div class="n">£3.38M</div>
+          <div class="l">In active qualified project enquiries, generated in roughly 60 days</div>
+          <div class="cap">Residential division client · 2026</div>
+        </div>
+        <div class="proof-cell">
+          <div class="n">£831K</div>
+          <div class="l">In qualified pipeline from 36 leads, off £1M+ in total enquiries</div>
+          <div class="cap">Residential division client · 2026</div>
+        </div>
+      </div>
+
+      <p class="note">We're rebuilding this same system for the scale, procurement complexity and margin discipline of £1M–£5M+ D&amp;B and fit-out firms — and taking on a small number of founding partners at this tier. Early partners get direct access to the two of us, not an account manager and a template.</p>
+    </div>
+  </section>
+
+  <!-- FIT -->
+  <section class="fit">
+    <div class="wrap">
+      <p class="eyebrow">Fit, not volume</p>
+      <h2 style="font-size:clamp(28px,3.4vw,38px); max-width:640px; line-height:1.2;">We work with a small number of firms. On purpose.</h2>
+
+      <div class="fit-grid">
+        <div class="fit-col yes">
+          <h3>This is for you if</h3>
+          <ul>
+            <li>You're a design &amp; build, commercial fit-out, or large-scale renovation/construction firm doing £1M–£5M+ turnover</li>
+            <li>You're capable of £10M+ but capped by pipeline, not delivery</li>
+            <li>You want enquiries qualified before they reach your estimating desk, not after</li>
+            <li>You want to see the pipeline, not just be told "it's going well"</li>
+          </ul>
+        </div>
+        <div class="fit-col no">
+          <h3>This isn't for you if</h3>
+          <ul>
+            <li>You're under £1M turnover and need volume more than precision</li>
+            <li>You want the cheapest leads possible, not the right ones</li>
+            <li>You're not willing to let someone else own part of your growth infrastructure</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final" id="audit">
+    <div class="wrap">
+      <p class="eyebrow" style="justify-content:center;">Book a pipeline audit</p>
+      <h2>See where your pipeline is leaking.</h2>
+      <p class="lede">We offer a Pipeline Audit to a small number of D&amp;B and fit-out firms each quarter. If there's a fit, we'll show you exactly where the gaps are — and what a properly engineered pipeline could generate at your scale. No pitch deck, no generic proposal.</p>
+      <a href="#" class="btn btn-primary">Book a Pipeline Audit <span class="btn-arrow">→</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="left">
+        <a class="logo" href="#top"><span class="mark"></span>THE IQ COLLECTIVE</a>
+        <p>Preconstruction &amp; pipeline systems for design &amp; build firms scaling to £10M+. UK-wide.</p>
+      </div>
+      <div class="right">
+        <div><a href="mailto:info@theiqcollective.com">info@theiqcollective.com</a></div>
+        <div style="margin-top:6px;">Capacity limited — enquire to check availability</div>
+      </div>
+    </div>
+    <div class="copyright">© 2026 The IQ Collective Ltd</div>
+  </div>
+</footer>
+
+</body>
+</html>
