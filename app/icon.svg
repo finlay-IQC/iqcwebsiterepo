@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  FAVICON PLACEHOLDER.
+
+  This is a stand-in built from the logo mark used in the nav and footer:
+  a bronze (#A9814C) square on the ink (#15181A) background.
+
+  TODO (pre-launch): replace the artwork below with the real IQ Collective
+  mark. Keep this filename and location — Next.js App Router picks up
+  app/icon.svg automatically and emits the <link rel="icon"> tag. Update
+  components/ui/Logo.tsx with the same artwork so the two stay in sync.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="4" fill="#15181A" />
+  <rect x="9" y="9" width="14" height="14" rx="1.5" fill="#A9814C" />
+</svg>
